@@ -18,16 +18,17 @@
     "global-require": "off",
     "import/extensions": "off",
     "import/no-dynamic-require": "off",
-    "import/no-extraneous-dependencies": "warn",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "import/no-unresolved": "off",
     "import/prefer-default-export": "warn",
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
     "no-restricted-globals": "off",
     "no-unused-vars": ["error", { "args": "none" }],
     "react/display-name": "off",
-    "react/jsx-indent": "off",
-    "react/jsx-wrap-multilines": "off",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-indent": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-wrap-multilines": "off"
   }
 }

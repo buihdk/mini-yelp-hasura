@@ -1,6 +1,14 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 
-const App = () => <h1>React App Starter</h1>;
+import Logo from '../components/shared/Logo';
+import PlanetSearch from '../components/PlanetSearch';
+
+const App = () => (
+  <>
+    <Logo />
+    <PlanetSearch />
+  </>
+);
 
 export default hot(App);
