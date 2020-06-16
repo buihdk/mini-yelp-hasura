@@ -16,8 +16,6 @@ const PLANETS = gql`
 
 const Planets = ({ newPlanets }) => {
   const { loading, error, data } = useQuery(PLANETS);
-  console.log('newPlanets', newPlanets);
-  console.log('planets', data && data.planets);
 
   const renderPlanets = planets =>
     planets.map(({ id, name, cuisine }) => (

@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import {
   ApolloProvider,
   ApolloClient,
@@ -8,6 +9,7 @@ import {
 } from '@apollo/client';
 
 import App from './app/App';
+import Logo from './components/shared/Logo';
 import './index.css';
 
 const client = new ApolloClient({
@@ -18,8 +20,11 @@ const client = new ApolloClient({
 });
 
 render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
+  <BrowserRouter>
+    <ApolloProvider client={client}>
+      <Logo />
+      <App />
+    </ApolloProvider>
+  </BrowserRouter>,
   document.getElementById('root'),
 );
