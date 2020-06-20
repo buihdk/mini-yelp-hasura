@@ -14,6 +14,7 @@
     "plugin:react/recommended"
   ],
   "plugins": ["prettier", "import", "react-hooks"],
+  "ignorePatterns": ["dist/bundle.js"],
   "rules": {
     "global-require": "off",
     "import/extensions": "off",
