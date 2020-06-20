@@ -6,7 +6,6 @@ import List from './List';
 import ListItem from './ListItem';
 import ListItemWithLink from './ListItemWithLink';
 import LogoText from './LogoText';
-import SearchForm from './SearchForm';
 
 export {
   Badge,
@@ -17,5 +16,4 @@ export {
   ListItem,
   ListItemWithLink,
   LogoText,
-  SearchForm,
 };

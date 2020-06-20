@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useQuery, gql } from '@apollo/client';
+import { useSubscription, useMutation, gql } from '@apollo/client';
 
+import InputForm from './shared/InputForm';
 import { List, ListItem, Badge } from './style';
 
 const PLANET = gql`
-  query Planet($id: uuid!) {
+  subscription Planet($id: uuid!) {
     planets_by_pk(id: $id) {
       id
       name
@@ -19,8 +20,24 @@ const PLANET = gql`
   }
 `;
 
-const Planet = ({ match: { params: id } }) => {
-  const { loading, error, data } = useQuery(PLANET, { variables: { id } });
+const ADD_REVIEW = gql`
+  mutation($body: String!, $id: uuid!) {
+    AddFearlessReview(body: $body, id: $id) {
+      affected_rows
+    }
+  }
+`;
+
+const Planet = ({
+  match: {
+    params: { id },
+  },
+}) => {
+  const [inputVal, setInputVal] = useState('');
+  const { loading, error, data } = useSubscription(PLANET, {
+    variables: { id },
+  });
+  const [addReview] = useMutation(ADD_REVIEW);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error! :(</p>;
@@ -32,6 +49,16 @@ const Planet = ({ match: { params: id } }) => {
       <h3>
         {name} <Badge>{cuisine}</Badge>
       </h3>
+      <InputForm
+        inputVal={inputVal}
+        onChange={e => setInputVal(e.target.value)}
+        onSubmit={() => {
+          addReview({ variables: { id, body: inputVal } })
+            .then(() => setInputVal(''))
+            .catch(e => setInputVal(e.message));
+        }}
+        buttonText="Submit"
+      />
       <List>
         {reviews.map(review => (
           <ListItem key={review.id}>{review.body}</ListItem>
@@ -42,7 +69,11 @@ const Planet = ({ match: { params: id } }) => {
 };
 
 Planet.propTypes = {
-  match: PropTypes.shape(PropTypes.object).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default Planet;

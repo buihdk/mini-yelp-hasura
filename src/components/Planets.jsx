@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useQuery, gql } from '@apollo/client';
 
-import { List, ListItem, Badge } from './style';
+import { List, ListItemWithLink, Badge } from './style';
 
 const PLANETS = gql`
   {
@@ -19,9 +20,11 @@ const Planets = ({ newPlanets }) => {
 
   const renderPlanets = planets =>
     planets.map(({ id, name, cuisine }) => (
-      <ListItem key={id}>
-        {name} <Badge>{cuisine}</Badge>
-      </ListItem>
+      <ListItemWithLink key={id}>
+        <Link to={`/planet/${id}`}>
+          {name} <Badge>{cuisine}</Badge>
+        </Link>
+      </ListItemWithLink>
     ));
 
   if (loading) return <p>Loading...</p>;

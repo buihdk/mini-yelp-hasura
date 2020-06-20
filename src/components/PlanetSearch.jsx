@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLazyQuery, gql } from '@apollo/client';
 
-import Search from './Search';
+import InputForm from './shared/InputForm';
 import Planets from './Planets';
 
 const SEARCH = gql`
@@ -20,10 +20,10 @@ const PlanetSearch = () => {
 
   return (
     <div>
-      <Search
+      <InputForm
         inputVal={inputVal}
         onChange={e => setInputVal(e.target.value)}
-        onSearch={() => search({ variables: { match: `%${inputVal}%` } })}
+        onSubmit={() => search({ variables: { match: `%${inputVal}%` } })}
       />
       <Planets newPlanets={data ? data.planets : null} />
     </div>
