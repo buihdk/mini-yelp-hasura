@@ -1,4 +1,4 @@
 # Mini Yelp
-https://buihdk.github.io/mini-yelp-hasura/
+https://www.buihdk.com/mini-yelp-hasura/
 
 Author: **Khoa Bui**
